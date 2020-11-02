@@ -1,0 +1,26 @@
+    long long int NCR(int n,int r)
+    {
+        if(r==0||r==n)
+            return 1;
+        long long int res=1;
+        for(int i=1;i<=r;i++){
+            res=res*(n-i+1)/i;    
+        }
+        return res;
+    }
+    vector<int> getRow(int n) {
+        vector<int>v;
+        if(n==0)
+        {
+            v.push_back(1);
+            return v;
+        }
+        else{
+            for(int i=0;i<=n;i++){
+                long long int res=NCR(n,i);
+                v.push_back(res);
+            }
+            return v;
+        }
+    }
+    Time:O(n*r)
