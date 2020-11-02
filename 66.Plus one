@@ -1,0 +1,21 @@
+    vector<int> plusOne(vector<int>& v) {
+        int carry=1;
+        vector<int>vres;
+        for(int i=v.size()-1;i>=0;i--){
+            int new_res=v[i]+carry;
+            if(new_res>=10)
+            {
+                vres.push_back(new_res-10);
+                carry=1;
+            }
+            else
+            {
+                vres.push_back(new_res);
+                carry=0;
+            }
+        }
+        if(carry==1)
+            vres.push_back(1);
+        reverse(vres.begin(),vres.end());
+        return vres;
+    }
