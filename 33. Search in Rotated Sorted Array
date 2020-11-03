@@ -8,3 +8,33 @@
     Time:O(n)
     -----------------------------------------------------------
     Efficient Solution:
+    
+        int search(vector<int>& nums, int target) {
+        int low=0,high=(nums.size()-1);
+        int mid=0;
+       while(low<=high)
+       {
+           int mid=low+(high-low)/2;
+           if(nums[mid]==target)
+               return mid;
+           if(nums[mid]<nums[high])//right half sorted
+           {
+               if(target>nums[mid] && target<=nums[high])//if target is greater than mid and target is less than right so check into right half
+                   low=mid+1;
+               else//check into left half
+                   high=mid-1;
+           }
+           else//left half sorted
+           {
+              if(target>nums[mid] || target<=nums[high])//same logic suppose -->[4,5,6,7,0,1,2]-->mid =7 so we have to check right half(target=1)
+                   low=mid+1;
+               else
+                   high=mid-1; 
+           }
+       }
+        if(low>high)
+            return -1;
+        else
+            return mid;
+    }
+    Time:O(log n)
