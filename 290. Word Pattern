@@ -1,0 +1,37 @@
+    bool wordPattern(string pattern, string s) {
+        int count=0;
+        int j=0,i=0;
+        vector<string>v;
+        for(i=0;i<s.length();i++){
+            if(s[i]==' '){
+                count++;
+                v.push_back(s.substr(j,i-j));
+                j=i+1;
+            }
+        }
+        v.push_back(s.substr(j,i-j));
+        if(pattern.length()!=v.size())
+            return false;
+        
+        j=0;
+        unordered_map<char,string>mp1;
+        unordered_map<string,char>mp2;
+        for(int i=0;i<pattern.length();i++){
+            if(mp1.find(pattern[i])==mp1.end() && mp2.find(v[j])==mp2.end())
+            {
+                mp1[pattern[i]]=v[j];
+                mp2[v[j]]=pattern[i];
+                j++;
+            }else if(mp1.find(pattern[i])==mp1.end() && mp2.find(v[j])!=mp2.end())
+                return false;
+            else if(mp1.find(pattern[i])!=mp1.end() && mp2.find(v[j])==mp2.end())
+                return false;
+            else{
+                if(mp1[pattern[i]]!=v[j] ||mp2[v[j]]!=pattern[i])
+                    return false;
+                else
+                    j++;
+            }
+        }
+        return true;
+    }
