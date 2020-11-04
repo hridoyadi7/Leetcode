@@ -1,0 +1,13 @@
+    int numWaterBottles(int numBottles, int numExchange) {
+        int count=numBottles;
+        int full=numBottles;
+        int empty=0;
+        int total=full;
+        while(total>=numExchange){
+            full=total/numExchange;
+            empty=total%numExchange;
+            count+=full;
+            total=full+empty;
+        }
+        return count;
+    }
