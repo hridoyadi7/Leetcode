@@ -1,0 +1,25 @@
+    int mySqrt(int x) {
+        if(x<=1)
+            return x;
+        long long int ans=1,start=1,end=x;
+        while(start<end){
+            long long int mid=(start+end)/2;
+            if((long long )mid*mid==(long long)x)
+                return mid;
+            else if((long long)mid*mid>(long long)x){
+                
+                end=mid-1;
+            }else{
+                ans=mid;
+                start=mid+1;
+            }
+        }
+        if(start==end){
+            if(start*start>x)//Handling the case '8'
+                return ans;
+            else  //Handling the case '5'
+                return start;
+        }
+        else
+            return ans;
+    }
