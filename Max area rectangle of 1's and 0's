@@ -1,0 +1,75 @@
+int getMaxArea(int  arr[], int n){
+    
+    // Your code here
+    vector<int>prev,next;
+    stack<int>s1;
+    for(int i=0;i<n;i++)
+    {
+        if(s1.empty())
+        {
+            prev.push_back(-1);
+            s1.push(i);
+        }
+        else
+        {
+            while(s1.empty()==false && arr[s1.top()]>=arr[i])
+                s1.pop();
+            if(s1.empty())
+                prev.push_back(-1);
+            else
+                prev.push_back(s1.top());
+            s1.push(i);
+        }
+    }
+    
+    stack<int>s2;
+    for(int i=n-1;i>=0;i--)
+    {
+        if(s2.empty())
+        {
+            next.push_back(n);
+            s2.push(i);
+        }
+        else
+        {
+            while(s2.empty()==false && arr[s2.top()]>=arr[i])
+                s2.pop();
+            if(s2.empty())
+                next.push_back(n);
+            else
+                next.push_back(s2.top());
+            s2.push(i);
+        }
+    }
+    reverse(next.begin(),next.end());
+    
+    int ans=0;
+    
+    for(int i=0;i<n;i++)
+    {
+        ans=max(ans,(arr[i]*(next[i]-prev[i]-1)));
+    }
+    return ans;
+}
+
+int maxArea(int M[MAX][MAX], int n, int m) {
+    // Your code here
+    int arr[m]={0};
+    for(int i=0;i<m;i++)
+        arr[i]=M[0][i];
+    int res=getMaxArea(arr,m);
+    for(int i=1;i<n;i++)
+    {
+        for(int j=0;j<m;j++)
+        {
+            if(M[i][j]==0)
+                arr[j]=0;
+            else
+                arr[j]+=1;
+        }
+        res=max(res,getMaxArea(arr,m));
+    }
+    
+    return res;
+    
+}
