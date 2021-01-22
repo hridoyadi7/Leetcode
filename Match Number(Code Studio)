@@ -1,0 +1,64 @@
+Given two linked lists, check whether they represent the same number. Each node of the list represents part of the whole integer which needs to be matched.
+Note : Return True If The Lists Match,Otherwise Return False.
+
+Sample Input 1:
+2
+0 01 2 -1
+0 12 -1
+43 5 678 -1
+4 3 56 87 -1
+Sample Output 1:
+True
+False
+
+/****************************************************************
+
+    Following is the class structure of the Node class:
+
+        class Node
+        {
+        public:
+	        int data;
+	        Node *next;
+	        Node(int data)
+	        {
+		        this->data = data;
+		        this->next = NULL;
+	        }
+        };
+
+*****************************************************************/
+
+bool checkRepresentaion(Node* head1, Node* head2) {
+    //Write your code here
+    string s1="";
+    string s2="";
+    Node *curr1=head1;
+    Node *curr2=head2;
+    while(curr1)
+    {
+        if(curr1->data>=0)
+        {
+            s1+=(to_string(curr1->data));
+        }
+        curr1=curr1->next;
+    }
+    while(curr2)
+    {
+        if(curr2->data>=0)
+        {
+            s2+=(to_string(curr2->data));
+        }
+        curr2=curr2->next;
+    }
+    int i=0;
+    while(s1[i]=='0' && s1.length()>0)
+        s1.erase(0,1);
+    while(s2[i]=='0' && s2.length()>0)
+        s2.erase(0,1);
+    if(s1==s2)
+        return true;
+    else
+        return false;
+        
+}
