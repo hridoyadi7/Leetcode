@@ -1,0 +1,33 @@
+Now, Coding Ninjas has the following task for you:
+You would be given two strings. You have to tell whether these strings form an anagram pair or not. The strings form an anagram pair if the letters of one string can be rearranged to form another string.
+
+Sample Input 1:
+rasp spar
+Sample Output 1:
+True
+Sample Input 2:
+rasp spaz
+Sample Output 2:
+False
+
+bool isAnagram(string str1, string str2)
+{
+    //Write your code here
+    if(str1.length()!=str2.length())
+        return false;
+	
+    int arr1[26]={0};
+    int arr2[26]={0};
+    
+    for(int i=0;i<str1.length();i++)
+        arr1[str1[i]-'a']++;
+    
+    for(int i=0;i<str2.length();i++)
+        arr2[str2[i]-'a']++;
+    
+    for(int i=0;i<26;i++)
+        if(arr1[i]!=arr2[i])
+            return false;
+    return true;
+ 
+}
