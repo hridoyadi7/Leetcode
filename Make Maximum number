@@ -1,0 +1,58 @@
+Given a linked list such that each node represents a digit. Construct the maximum number possible from the given digits.
+You just need to print the maximum Integer that can be formed.
+Sample Input 1 :
+  1 2 2 0 9 -1
+Sample Output 1 :
+  92210
+Sample Input 2 :
+  1 0 0 0 3 -1
+Sample Output 2 :
+  31000
+  
+/****************************************************************
+
+    Following is the class structure of the Node class:
+
+        class Node
+        {
+        public:
+	        int data;
+	        Node *next;
+	        Node(int data)
+	        {
+		        this->data = data;
+		        this->next = NULL;
+	        }
+        };
+
+*****************************************************************/
+
+string findLargestNum(Node *head)
+{
+    // Write your code here
+    if(head==NULL)
+        return "";
+    Node *curr=head;
+    string str="";
+    int arr[10]={0};
+    int count=0;
+    while(curr)
+    {
+        if(curr->data>=0){
+        	arr[curr->data]++;
+            count++;
+    	}
+        curr=curr->next;
+    }
+    if(arr[0]==count)
+        return "0";
+    for(int i=9;i>=0;i--)
+    {
+        while(arr[i]!=0)
+        {
+            str+=(to_string(i));
+            arr[i]--;
+        }
+    }
+    return str;
+}
